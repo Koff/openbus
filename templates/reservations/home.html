@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+        <div class="col-lg-12">
+            <h1 class="page-header">Upcoming Trips</h1>
+            <div class="col-lg-10 col-lg-offset-1 centered table-responsive">
+                <table class="table table-responsive table-hover">
+                    <tr>
+                        <th>Departure City</th>
+                        <th>Arrival City</th>
+                        <th>Departure Date</th>
+                        <th>Arrival Date</th>
+                        <th>Available Seats</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for trip in queryset %}
+                        <tr>
+                            <td>{{ trip.departure_city }}</td>
+                            <td>{{ trip.arrival_city }}</td>
+                            <td>{{ trip.departure_date | time }} on {{ trip.departure_date | date }}</td>
+                            <td>{{ trip.arrival_date | time }} on {{ trip.arrival_date | date }}</td>
+                            <td>{{ trip.available_seats }}</td>
+                            <td>{{ trip.public_price }} &euro;</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+
+{% endblock content %}
