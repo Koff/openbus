@@ -79,7 +79,15 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Trip(models.Model):
     id = models.AutoField(primary_key=True)
     departure_city = models.CharField(max_length=100, blank=False)
+    departure_address = models.CharField(max_length=254, blank=False, default='Comedores Universitarios de Fuentenueva '
+                                                                              'Calle Rector Marín Ocete, s/n, 18071 '
+                                                                              'Granada, Spain')
+    departure_address_url = models.URLField(max_length=254, blank=False, default='https://goo.gl/maps/U2YjHAnupps')
     arrival_city = models.CharField(max_length=100, blank=False)
+    arrival_address_url = models.URLField(max_length=254, blank=False, default='https://goo.gl/maps/eNjTxV7BcRU2')
+    arrival_address = models.CharField(max_length=254, blank=False, default='Estacion de Autobuses de Ronda'
+                                                                            'Plaza de Concepción García Redondo, '
+                                                                            's/n, 29400 Ronda, Málaga, Spain')
     departure_date = models.DateTimeField()
     arrival_date = models.DateTimeField()
     total_seats = models.IntegerField(default=0, blank=True)

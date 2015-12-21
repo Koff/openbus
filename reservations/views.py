@@ -1,6 +1,4 @@
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.views.generic import TemplateView, FormView, CreateView, ListView
 from .models import Reservation, User, Trip
 from .forms import RegistrationForm, LogInForm, ProfileForm
@@ -10,7 +8,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.utils import timezone
-from datetime import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -62,11 +59,9 @@ class LogInView(FormView):
                 print("User is valid, active and authenticated")
                 return redirect(to='home')
             else:
-                print("The password is valid, but the account has been disabled!")
+                messages.add_message(self.request, messages.ERROR, 'Your account has been suspended...')
         else:
-            # the authentication system was unable to verify the username and password
             messages.add_message(self.request, messages.ERROR, 'Invalid username or password')
-            print("The username and password were incorrect.")
             return render(request=self.request, template_name='reservations/login.html')
 
         return super(LogInView, self).form_valid(form)
@@ -139,3 +134,14 @@ class Logout(LoginRequiredMixin, ListView):
         logout(request)
         print(request.user)
         return redirect(to='login')
+
+
+class NewReservation(LoginRequiredMixin, ListView):
+    template_name = 'reservations/new_reservation.html'
+    trip_dict = {}
+
+    def get(self, request, *args, **kwargs):
+        trip_id = self.args[0]
+        trip = Trip.objects.all().filter(id=trip_id).first()
+
+        return render(request=request, template_name=self.template_name)

@@ -14,7 +14,7 @@ class TripAdmin(admin.ModelAdmin):
     list_display = ('departure_city', 'arrival_city', 'departure_date', 'arrival_date', 'total_seats', 'available_seats'
                     , total_revenue, 'cost')
     readonly_fields = (total_revenue, 'available_seats')
-    fields = ('departure_city', 'arrival_city', 'departure_date', 'arrival_date', 'total_seats', 'cost', readonly_fields)
+    fields = ('departure_city', 'arrival_city', 'arrival_address_url', 'departure_date', 'arrival_date', 'total_seats', 'cost', readonly_fields)
 
     inlines = [ReservationsInline]
 

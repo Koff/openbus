@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from reservations.views import ReserveView, LogInView, HomeView, MyTripsView, Profile, Logout
+from reservations.views import ReserveView, LogInView, HomeView, MyTripsView, Profile, Logout, NewReservation
 from reservations import urls as reservations_url
 
 
@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^my_trips/', view=MyTripsView.as_view(), name='my_trips'),
     url(r'^logout/', view=Logout.as_view(), name='logout'),
     url(r'^profile/', view=Profile.as_view(), name='profile'),
+    url(r'^new_reservation/([0-9]{0,6})', view=NewReservation.as_view(), name='new_reservation'),
 ]
