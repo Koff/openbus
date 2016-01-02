@@ -17,7 +17,7 @@
                     </tr>
                     {% for trip in upcoming_trips %}
                         <tr>
-                            <td>{{ trip.departure_city }}</td>
+                            <td>{{ trip.departure_city }} {{ trip.departure_address_url }}</td>
                             <td>{{ trip.arrival_city }}</td>
                             <td>{{ trip.departure_date | time }} on {{ trip.departure_date | date }}</td>
                             <td>{{ trip.arrival_date | time }} on {{ trip.arrival_date | date }}</td>
@@ -46,8 +46,8 @@
                     </tr>
                     {% for trip in past_trips %}
                         <tr>
-                            <td>{{ trip.departure_city }}</td>
-                            <td>{{ trip.arrival_city }}</td>
+                            <td><a target="_blank" href="{{ trip.departure_address_url }}">{{ trip.departure_city }}</a></td>
+                            <td><a target="_blank" href="{{ trip.arrival_address_url }}">{{ trip.arrival_city }}</a></td>
                             <td>{{ trip.departure_date | time }} on {{ trip.departure_date | date }}</td>
                             <td>{{ trip.arrival_date | time }} on {{ trip.arrival_date | date }}</td>
                             <td>{{ trip.available_seats }}</td>

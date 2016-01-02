@@ -13,13 +13,11 @@ class UserManager(BaseUserManager):
             raise ValueError('Users must have an email address')
 
         user = self.model(email=self.normalize_email(email),)
-
         user.set_password(password)
         user.first_name = first_name
         user.last_name = last_name
         user.phone_number = phone_number
         user.is_active = False
-
         user.save(using=self._db)
         return user
 
@@ -82,7 +80,7 @@ class Trip(models.Model):
     departure_address = models.CharField(max_length=254, blank=False, default='Comedores Universitarios de Fuentenueva '
                                                                               'Calle Rector Marín Ocete, s/n, 18071 '
                                                                               'Granada, Spain')
-    departure_address_url = models.URLField(max_length=254, blank=False, default='https://goo.gl/maps/U2YjHAnupps')
+    departure_address_url = models.URLField(max_length=254, verbose_name="Departure Address ULR", blank=False, default='https://goo.gl/maps/U2YjHAnupps')
     arrival_city = models.CharField(max_length=100, blank=False)
     arrival_address_url = models.URLField(max_length=254, blank=False, default='https://goo.gl/maps/eNjTxV7BcRU2')
     arrival_address = models.CharField(max_length=254, blank=False, default='Estacion de Autobuses de Ronda'
@@ -112,4 +110,3 @@ class Reservation(models.Model):
                                        self.trip_id.departure_city,
                                        self.trip_id.arrival_city,
                                        self.trip_id.departure_date)
-

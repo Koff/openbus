@@ -1,5 +1,3 @@
 __pycache__
-openbus/__pycache__/
-reservations/__pycache__/
-
+migrations/
 
